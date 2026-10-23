@@ -10,7 +10,7 @@
 ![Wireshark](https://img.shields.io/badge/Wireshark-capture-1679A7?logo=wireshark&logoColor=white)
 
 **Contexte :** projet de 1ʳᵉ année de BUT Réseaux & Télécommunications (IUT Nord Franche-Comté, 2025-2026), réalisé en trinôme en trois jours dans le cadre de la SAÉ 21 *« Construire un réseau informatique pour une petite structure »*.
-Une SAÉ est un projet en situation professionnelle, découpé en jalons validés par l'enseignant. Équipe : Emirkan Ö., Mohamed H., Elvin T. (groupe 4).
+Une SAÉ est un projet en situation professionnelle, découpé en jalons validés par l'enseignant.
 
 ![Le Raspberry Pi démarre sans carte SD, par le réseau, jusqu'au shell](docs/images/boot-pxe-raspberry.gif)
 *Le Raspberry Pi, sans carte SD, cherche un serveur sur le réseau, charge son système par TFTP et NFS, puis joint le serveur à travers le routeur (vidéo accélérée — [version complète](docs/video/boot-pxe-raspberry.mp4)).*
