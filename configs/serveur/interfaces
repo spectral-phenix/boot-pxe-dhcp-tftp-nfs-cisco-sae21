@@ -1,0 +1,29 @@
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+source /etc/network/interfaces.d/*
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+auto ens18
+iface ens18 inet static
+	address 10.0.20.4
+	netmask 255.255.0.0
+	gateway 10.0.20.1
+	dns-nameservers 8.8.8.8 8.8.4.4
+
+auto ens19
+iface ens19 inet static
+	address 172.16.4.57
+	netmask 255.255.255.252
+	up ip route add 172.16.4.0/27 via 172.16.4.58
+
+auto ens20
+iface ens20 inet static
+	address 172.16.4.49
+	netmask 255.255.255.248
+
+

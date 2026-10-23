@@ -1,0 +1,59 @@
+# /etc/dhcp/dhcpd.conf — version rendue pendant la SAÉ (commentaires d'exemple d'ISC retirés).
+# Version relue : dhcpd.conf. Comparer les deux avec : sudo lab/lab.sh up configs/serveur/dhcpd.conf.rendu
+
+# option definitions common to all supported networks...
+default-lease-time 600;
+max-lease-time 7200;
+
+allow bootp;
+allow booting;
+
+subnet 172.16.4.56 netmask 255.255.255.252 {
+#	range 172.16.4.57 172.16.4.58;
+}
+
+subnet 172.16.4.48 netmask 255.255.255.248 {
+	range 172.16.4.50 172.16.4.54;
+	option routers 172.16.4.49;
+	option broadcast-address 172.16.4.55;
+	option domain-name-servers 194.57.85.210;
+	filename "pxelinux.0";
+	next-server 172.16.4.49;
+}
+
+subnet 172.16.4.0 netmask 255.255.255.224 {
+        range 172.16.4.3 172.16.4.9;
+        option routers 172.16.4.1;
+        option broadcast-address 172.16.4.31;
+        option domain-name-servers 194.57.85.210;
+        filename "pxelinux.0";
+        next-server 172.16.4.57;
+}
+
+
+host clipxe-4{
+	hardware ethernet bc:24:11:f4:f2:52;
+	fixed-address 172.16.4.54;
+	filename "pxelinux.0";
+	next-server 172.16.4.49;
+}
+
+host raspi-4{
+        hardware ethernet d8:3a:dd:0c:fe:70; 
+        fixed-address 172.16.4.10;
+        filename "pxelinux-0";
+        next-server 172.16.4.57;
+	option tftp-server-name "172.16.4.57";
+	option vendor-class-identifier "PXEClient";
+	option vendor-encapsulated-options "Raspberry Pi Boot";
+}
+
+host pcsalletp-4{
+        hardware ethernet f0:b2:b9:23:30:d7; 
+        fixed-address 172.16.4.11;
+        filename "pxelinux-0";
+        next-server 172.16.4.57;
+}
+#deny unknown-clients;
+
+ddns-update-style none;

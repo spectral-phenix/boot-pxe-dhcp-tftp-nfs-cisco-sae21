@@ -1,0 +1,9 @@
+# /etc/exports — servpxe-4
+# Fichiers de démarrage (netboot Debian, firmware Raspberry) : lecture seule
+/srv/tftp           *(async,no_root_squash,no_subtree_check,ro)
+# Systèmes de fichiers racine montés par les clients sans disque
+/srv/nfs            *(rw,sync,no_subtree_check,no_root_squash)
+# Racine du Raspberry Pi n°1 (répertoire = numéro de série du Pi)
+/srv/nfs/94162035   *(rw,sync,no_subtree_check,no_root_squash)
+# Racine du Raspberry Pi n°2 (jalon 12)
+/srv/nfs/93214211   *(rw,sync,no_subtree_check,no_root_squash)

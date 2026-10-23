@@ -1,0 +1,6 @@
+# /etc/default/isc-dhcp-server — servpxe-4
+# Le serveur DHCP n'écoute que sur Réseau1 (ens19, requêtes relayées par le routeur)
+# et Réseau2 (ens20, VM clientes). Jamais sur ens18 (accès Internet par le NAT de Proxmox).
+INTERFACESv4="ens19 ens20"
+# IPv6 désactivé : la ligne INTERFACESv6 reste commentée
+#INTERFACESv6=""

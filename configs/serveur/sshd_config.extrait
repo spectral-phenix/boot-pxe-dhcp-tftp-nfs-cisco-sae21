@@ -1,0 +1,10 @@
+# /etc/ssh/sshd_config — servpxe-4 (seules les lignes modifiées sont reprises)
+PermitRootLogin no            # connexion directe en root interdite
+ListenAddress 172.16.4.57     # SSH n'écoute que sur Réseau1 (côté routeur)
+Banner /etc/issue.net         # « Bienvenue sur le serveur servpxe-4 »
+KbdInteractiveAuthentication no
+UsePAM yes
+
+# /etc/ssh/ssh_config (côté client) — compatibilité avec l'OpenSSH ancien des Cisco
+#   KexAlgorithms +diffie-hellman-group1-sha1
+#   Ciphers +aes128-cbc,aes128-ctr

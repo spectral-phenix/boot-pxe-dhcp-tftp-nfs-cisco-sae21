@@ -1,0 +1,29 @@
+! Accès SSH au routeur et au switch (jalons 10 et 11)
+! Ces commandes ont été appliquées après l'export des deux configurations de ce
+! dossier : elles n'y apparaissent donc pas. Le mot de passe est un exemple.
+!
+! L'ordre compte : la clé RSA est nommée d'après hostname + domain-name,
+! qui doivent donc exister avant de la générer.
+!
+hostname router-4                       ! (switch-4 sur le commutateur)
+ip domain-name sae21.local
+crypto key generate rsa modulus 2048
+ip ssh version 2
+username admin privilege 15 secret <mot-de-passe>
+!
+line vty 0 4
+ transport input ssh                    ! Telnet refusé
+ login local                            ! comptes locaux (username ...)
+!
+! Sur le switch uniquement : sans passerelle, il ne peut pas répondre au serveur,
+! qui est dans un autre réseau (Réseau1). Ligne absente de switch-4.txt.
+ip default-gateway 172.16.4.1
+!
+! Côté serveur Linux, /etc/ssh/ssh_config : l'IOS du 2901 ne propose que des
+! algorithmes anciens, désactivés par défaut dans OpenSSH récent.
+!   KexAlgorithms +diffie-hellman-group1-sha1
+!   Ciphers +aes128-cbc,aes128-ctr
+!
+! Test depuis servpxe-4 :
+!   ssh admin@172.16.4.58     (routeur)
+!   ssh admin@172.16.4.2      (switch, via le routeur)
